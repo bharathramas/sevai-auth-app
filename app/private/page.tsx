@@ -3,10 +3,14 @@ import { authOptions } from "../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 
 export default async function PrivatePage() {
+  console.log("⏳ Attempting to fetch session on /private");
+
   const session = await getServerSession(authOptions);
+  console.log("🔍 Fetched session:", session);
 
   if (!session) {
-    redirect("/"); // 🔁 go back to homepage if not logged in
+    console.log("🚫 No session found, redirecting...");
+    redirect("/");
   }
 
   return (

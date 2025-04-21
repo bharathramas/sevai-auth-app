@@ -20,12 +20,6 @@ export default function HomePage() {
         <p className="text-lg sm:text-xl text-gray-300 mb-8">
           Built on a modern stack — SevAI helps enterprises intelligently navigate operations, support, and decision-making.
         </p>
-        <a
-          href="https://app.sevai.co"
-          className="inline-block bg-white text-black text-sm px-5 py-3 rounded-full shadow hover:bg-gray-200 transition"
-        >
-          <span className="font-semibold">Coming Soon at</span> app.sevai.co
-        </a>
       </div>
     </div>
   );
