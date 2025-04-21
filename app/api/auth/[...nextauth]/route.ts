@@ -18,7 +18,7 @@ export const authOptions: NextAuthOptions = {
     CognitoProvider({
       clientId: process.env.COGNITO_CLIENT_ID!,
       clientSecret: process.env.COGNITO_CLIENT_SECRET || "dummy",
-      issuer: "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_ll2TksjQy",
+      issuer: "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_AJNx5w4vE",
     }),
   ],
   callbacks: {

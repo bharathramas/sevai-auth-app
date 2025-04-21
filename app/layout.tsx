@@ -1,5 +1,7 @@
 import './globals.css'; // ✅ Import Tailwind styles
 import ForceTailwind from './ForceTailwind';
+import SessionWrapper from "../components/SessionWrapper"; // ✅ adjust path if needed
+
 
 export const metadata = {
   title: 'SevAI',
