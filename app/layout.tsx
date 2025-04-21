@@ -1,8 +1,8 @@
-import '../index.css'; // ✅ Import Tailwind styles
+import './globals.css'; // ✅ Import Tailwind styles
 
 export const metadata = {
   title: 'SevAI',
-  description: 'AI-native IT Assistant',
+  description: 'AI-native Enterprise Assistant',
 };
 
 export default function RootLayout({
@@ -12,7 +12,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+         {children}
+         <div className="hidden force-styles" /> {/* 👈 force Tailwind to include these */}
+      </body>
     </html>
   );
 }
