@@ -16,7 +16,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-         {children}
+         <SessionWrapper>
+          {children}
+         </SessionWrapper>
          <ForceTailwind />
       </body>
     </html>
