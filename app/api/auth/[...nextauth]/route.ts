@@ -17,7 +17,7 @@ export const authOptions: NextAuthOptions = {
   providers: [
     CognitoProvider({
       clientId: process.env.COGNITO_CLIENT_ID!,
-      clientSecret: process.env.COGNITO_CLIENT_SECRET || "dummy",
+      clientSecret: process.env.COGNITO_CLIENT_SECRET!,
       issuer: "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_AJNx5w4vE",
     }),
   ],
@@ -25,6 +25,8 @@ export const authOptions: NextAuthOptions = {
     async jwt({ token, account }): Promise<ExtendedToken> {
       if (account?.id_token) {
         const decoded = parseJwt(account.id_token);
+        console.log("🎯 Decoded Cognito JWT:", decoded);
+
         token.role = decoded["custom:role"] as string;
         token.tenant_id = decoded["custom:tenant_id"] as string;
         token.email = decoded.email as string;
@@ -38,9 +40,12 @@ export const authOptions: NextAuthOptions = {
       session: any;
       token: ExtendedToken;
     }) {
-      session.user.role = token.role || "";
-      session.user.tenant_id = token.tenant_id || "";
-      session.user.email = token.email || "";
+      session.user = {
+        ...session.user,
+        email: token.email || "",
+        role: token.role || "",
+        tenant_id: token.tenant_id || "",
+      };
       return session;
     },
   },
