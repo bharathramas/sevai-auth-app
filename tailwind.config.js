@@ -1,6 +1,12 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./app/**/*.{js,ts,jsx,tsx}'],
+  content: [
+    './app/**/*.{js,ts,jsx,tsx}',
+    './components/**/*.{js,ts,jsx,tsx}',
+    './pages/**/*.{js,ts,jsx,tsx}',
+    './index.css',
+    './layout.tsx',
+  ],
   safelist: [
     'bg-black', 'text-white', 'text-blue-500', 'text-gray-300', 'text-black',
     'bg-white', 'hover:bg-gray-200', 'inline-block', 'text-center', 'rounded-full',
