@@ -1,4 +1,5 @@
 import './globals.css'; // ✅ Import Tailwind styles
+import ForceTailwind from './ForceTailwind';
 
 export const metadata = {
   title: 'SevAI',
@@ -14,7 +15,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
          {children}
-         <div className="hidden force-styles" /> {/* 👈 force Tailwind to include these */}
+         <ForceTailwind />
       </body>
     </html>
   );
