@@ -1,3 +1,5 @@
+"use client";
+
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/authOptions";
 import Header from "@/components/Header";
