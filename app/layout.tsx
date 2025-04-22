@@ -1,7 +1,7 @@
-import './globals.css'; // ✅ Import Tailwind styles
+import './globals.css';
 import ForceTailwind from './ForceTailwind';
-import SessionWrapper from "../components/SessionWrapper"; // ✅ adjust path if needed
-
+import SessionWrapper from "../components/SessionWrapper";
+import { Toaster } from 'sonner'; // ✅ Add this line
 
 export const metadata = {
   title: 'SevAI',
@@ -16,10 +16,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-         <SessionWrapper>
+        <SessionWrapper>
           {children}
-         </SessionWrapper>
-         <ForceTailwind />
+        </SessionWrapper>
+        <Toaster richColors position="top-right" /> {/* ✅ Add this line */}
+        <ForceTailwind />
       </body>
     </html>
   );

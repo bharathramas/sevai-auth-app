@@ -29,6 +29,7 @@ export default function Header() {
               <Link href="/config" className="block px-4 py-2 hover:bg-zinc-800">Organization</Link>
               <Link href="/config/connectors" className="block px-4 py-2 hover:bg-zinc-800">Connectors</Link>
               <Link href="/config/users" className="block px-4 py-2 hover:bg-zinc-800">Users</Link>
+              <Link href="/upload" className="block px-4 py-2 hover:bg-zinc-800">Upload</Link>
               <div className="border-t border-zinc-700 my-1" />
               <Link
                 href="/master/config"
