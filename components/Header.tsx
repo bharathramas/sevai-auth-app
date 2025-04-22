@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { useSession, signOut } from "next-auth/react";
 
 const pages = [
   { href: "/upload", label: "Upload" },
@@ -13,9 +14,10 @@ const pages = [
 
 export default function Header() {
   const [fontSize, setFontSize] = useState("text-base");
+  const { data: session } = useSession();
 
   return (
-    <header className="sticky top-0 z-50 w-full backdrop-blur-lg bg-black/70 border-b border-zinc-800 shadow-lg">
+    <header className="sticky top-0 z-50 w-full backdrop-blur-lg bg-transparent border-b border-zinc-800 shadow-lg">
       <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between px-6 py-4">
         <Link
           href="/"
@@ -29,28 +31,12 @@ export default function Header() {
           <div className="relative group">
             <button className="text-white font-medium">Config ▾</button>
             <div className="absolute left-0 mt-2 hidden group-hover:block bg-zinc-900 text-white rounded shadow-lg min-w-[160px] border border-zinc-700 z-50">
-              <Link
-                href="/config"
-                className="block px-4 py-2 hover:bg-zinc-800"
-              >
-                Organization
-              </Link>
-              <Link
-                href="/config/connectors"
-                className="block px-4 py-2 hover:bg-zinc-800"
-              >
-                Connectors
-              </Link>
-              <Link
-                href="/config/users"
-                className="block px-4 py-2 hover:bg-zinc-800"
-              >
-                Users
-              </Link>
+              <Link href="/config" className="block px-4 py-2 hover:bg-zinc-800">Organization</Link>
+              <Link href="/config/connectors" className="block px-4 py-2 hover:bg-zinc-800">Connectors</Link>
+              <Link href="/config/users" className="block px-4 py-2 hover:bg-zinc-800">Users</Link>
             </div>
           </div>
 
-          {/* Other pages */}
           {pages.map(({ href, label }) => (
             <Link
               key={href}
@@ -61,7 +47,6 @@ export default function Header() {
             </Link>
           ))}
 
-          {/* Font size selector */}
           <select
             value={fontSize}
             onChange={(e) => setFontSize(e.target.value)}
@@ -73,30 +58,15 @@ export default function Header() {
             <option value="text-lg">Large</option>
           </select>
 
-          {/* More Dropdown */}
-          <div className="relative group">
-            <button className="text-white font-medium">More ▾</button>
-            <div className="absolute right-0 mt-2 hidden group-hover:block bg-zinc-900 text-white rounded shadow-lg min-w-[160px] border border-zinc-700">
-              <Link
-                href="/about"
-                className="block px-4 py-2 hover:bg-zinc-800"
-              >
-                About Us
-              </Link>
-              <Link
-                href="/contact"
-                className="block px-4 py-2 hover:bg-zinc-800"
-              >
-                Contact
-              </Link>
-              <Link
-                href="/privacy"
-                className="block px-4 py-2 hover:bg-zinc-800"
-              >
-                Privacy Policy
-              </Link>
-            </div>
-          </div>
+          {/* Sign Out (if logged in) */}
+          {session?.user && (
+            <button
+              onClick={() => signOut({ callbackUrl: "/" })}
+              className="ml-4 text-sm text-white px-3 py-1 border border-white rounded hover:bg-white hover:text-black transition"
+            >
+              Sign out
+            </button>
+          )}
         </nav>
       </div>
     </header>
