@@ -1,17 +1,18 @@
-// ✅ File: app/private/page.tsx
+// app/private/page.tsx
+'use client';
 
-"use client";
+import Header from '@/components/Header';
+import TopBarHero from '@/components/TopBarHero';
+import Footer from '@/components/Footer';
 
-import Header from "@/components/Header";
-import TopBarHero from "@/components/TopBarHero";
-
-export default function PrivatePage() {
+export default function PrivateHome() {
   return (
-    <>
+    <main className="bg-black text-white min-h-screen flex flex-col">
       <Header />
-      <main className="min-h-screen bg-gradient-to-b from-black via-zinc-900 to-gray-950">
+      <div className="flex-grow">
         <TopBarHero />
-      </main>
-    </>
+      </div>
+      <Footer />
+    </main>
   );
 }

@@ -1,25 +1,37 @@
 'use client';
+
 import dynamicImport from "next/dynamic";
+import Footer from "../components/Footer";
+
 const AuthButtons = dynamicImport(() => import("../components/AuthButtons"), { ssr: false });
 
 export const dynamic = "force-dynamic";
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-black text-white relative px-6 py-8">
-      {/* Login/Logout button top-right */}
-      <div className="absolute top-6 right-6">
-        <AuthButtons />
-      </div>
+    <main className="bg-black text-white flex flex-col min-h-screen">
+      <div className="flex-grow flex flex-col items-center justify-center px-6 text-center relative">
+        {/* Login/Logout button top-right */}
+        <div className="absolute top-6 right-6">
+          <AuthButtons />
+        </div>
 
-      <div className="text-center mt-12">
-        <h1 className="text-4xl sm:text-6xl font-extrabold mb-6 tracking-tight leading-tight">
-          Meet <span className="text-blue-500">SevAI</span><br />Your AI-native Enterprise Assistant
+        <h1 className="text-5xl sm:text-6xl font-extrabold tracking-tight leading-tight bg-gradient-to-r from-blue-500 to-purple-400 text-transparent bg-clip-text mb-6">
+          Meet SevAI
         </h1>
-        <p className="text-lg sm:text-xl text-gray-300 mb-8 max-w-2xl">
-          Built on a modern stack — SevAI helps enterprises intelligently navigate operations, support, and decision-making.
+
+        <p className="text-zinc-400 text-lg sm:text-xl max-w-2xl mb-4 leading-relaxed">
+          Your AI-native Enterprise Assistant.
+        </p>
+        <p className="text-zinc-400 text-lg sm:text-xl max-w-2xl mb-2 leading-relaxed">
+          Seamlessly monitor, support, and scale IT operations.
+        </p>
+        <p className="text-zinc-400 text-lg sm:text-xl max-w-2xl leading-relaxed">
+          Multilingual. Secure. Designed for Enterprises.
         </p>
       </div>
-    </div>
+
+      <Footer />
+    </main>
   );
 }
