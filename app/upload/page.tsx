@@ -1,3 +1,5 @@
+'use client';
+
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 import { UploadCloud, Loader2 } from "lucide-react";

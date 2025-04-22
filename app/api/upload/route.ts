@@ -1,8 +1,8 @@
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import { NextRequest, NextResponse } from "next/server";
-import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth"; // Adjust this path to your actual auth config
 import { v4 as uuidv4 } from "uuid";
+import { getServerSession } from "next-auth/next"; // ✅ works in App Router
 
 const s3 = new S3Client({ region: "us-east-1" });
 const BUCKET_NAME = "sevaiapp";
@@ -12,7 +12,8 @@ export async function POST(req: NextRequest) {
   const tenant_id = formData.get("tenant_id")?.toString();
   const sensitivity_level = formData.get("sensitivity_level")?.toString();
 
-  const session = await getServerSession(authOptions);
+  //const session = await getServerSession(authOptions);
+  const session = await getServerSession();
   const uploaded_by = session?.user?.email ?? "unknown@sevai.co";
 
   if (!tenant_id || !sensitivity_level) {
