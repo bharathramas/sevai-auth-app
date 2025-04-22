@@ -17,9 +17,11 @@ import {
 
 const defaultOrgConfig = {
   org_name: "Acme Corp",
-  industry: "Retail",
   customer_type: "retail",
   description: "",
+  contact_name: "",
+  contact_phone: "",
+  contact_email: "",
 };
 
 export default function ConfigOrganizationPage() {
@@ -64,23 +66,6 @@ export default function ConfigOrganizationPage() {
             </div>
 
             <div>
-              <Label className="text-white mb-1 block">Industry</Label>
-              <Select
-                value={orgConfig.industry}
-                onValueChange={(val) => handleChange("industry", val)}
-              >
-                <SelectTrigger className="bg-zinc-800 border-zinc-700 text-white">
-                  <SelectValue placeholder="Select industry" />
-                </SelectTrigger>
-                <SelectContent className="bg-zinc-900 border-zinc-700 text-white">
-                  {["Retail", "Insurance", "Real Estate", "Healthcare", "Manufacturing"].map((value) => (
-                    <SelectItem key={value} value={value}>{value}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-
-            <div>
               <Label className="text-white mb-1 block">Customer Type</Label>
               <Select
                 value={orgConfig.customer_type}
@@ -90,8 +75,8 @@ export default function ConfigOrganizationPage() {
                   <SelectValue placeholder="Select customer type" />
                 </SelectTrigger>
                 <SelectContent className="bg-zinc-900 border-zinc-700 text-white">
-                  {["retail", "insurance", "real_estate", "healthcare", "manufacturing"].map((value) => (
-                    <SelectItem key={value} value={value}>{value}</SelectItem>
+                  {["retail", "insurance", "real_estate", "healthcare", "manufacturing"].map((val) => (
+                    <SelectItem key={val} value={val}>{val}</SelectItem>
                   ))}
                 </SelectContent>
               </Select>
@@ -105,6 +90,38 @@ export default function ConfigOrganizationPage() {
                 placeholder="Brief description of the org, goals, data focus, etc."
                 className="bg-zinc-800 border-zinc-700 text-white"
               />
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+              <div>
+                <Label className="text-white mb-1 block">Primary Contact</Label>
+                <Input
+                  value={orgConfig.contact_name}
+                  onChange={(e) => handleChange("contact_name", e.target.value)}
+                  placeholder="Contact Name"
+                  className="bg-zinc-800 border-zinc-700 text-white"
+                />
+              </div>
+
+              <div>
+                <Label className="text-white mb-1 block">Contact Phone</Label>
+                <Input
+                  value={orgConfig.contact_phone}
+                  onChange={(e) => handleChange("contact_phone", e.target.value)}
+                  placeholder="Phone Number"
+                  className="bg-zinc-800 border-zinc-700 text-white"
+                />
+              </div>
+
+              <div>
+                <Label className="text-white mb-1 block">Contact Email</Label>
+                <Input
+                  value={orgConfig.contact_email}
+                  onChange={(e) => handleChange("contact_email", e.target.value)}
+                  placeholder="Email Address"
+                  className="bg-zinc-800 border-zinc-700 text-white"
+                />
+              </div>
             </div>
           </div>
         </div>

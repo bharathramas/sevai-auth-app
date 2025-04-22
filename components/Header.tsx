@@ -1,11 +1,9 @@
-"use client";
+'use client';
 
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
 
 const pages = [
-  { href: "/upload", label: "Upload" },
-  { href: "/ingest", label: "Ingest" },
   { href: "/search", label: "Search" },
   { href: "/dashboard", label: "Dashboard" },
 ];
@@ -27,7 +25,7 @@ export default function Header() {
           {/* Config Dropdown */}
           <div className="relative group">
             <button className="text-white">Config ▾</button>
-            <div className="absolute left-0 mt-2 hidden group-hover:block bg-zinc-900 text-white rounded shadow-lg min-w-[180px] border border-zinc-700 z-50">
+            <div className="absolute left-0 mt-2 group-hover:block group-focus-within:block bg-zinc-900 text-white rounded shadow-lg min-w-[180px] border border-zinc-700 z-50 hidden">
               <Link href="/config" className="block px-4 py-2 hover:bg-zinc-800">Organization</Link>
               <Link href="/config/connectors" className="block px-4 py-2 hover:bg-zinc-800">Connectors</Link>
               <Link href="/config/users" className="block px-4 py-2 hover:bg-zinc-800">Users</Link>
@@ -53,7 +51,11 @@ export default function Header() {
 
           {session?.user && (
             <button
-              onClick={() => signOut({ callbackUrl: "/" })}
+              onClick={() =>
+                signOut({
+                  callbackUrl: `${window.location.origin}/`,
+                })
+              }
               className="ml-4 text-white text-sm px-3 py-1 border border-white rounded hover:bg-white hover:text-black transition"
             >
               Sign out

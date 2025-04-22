@@ -1,4 +1,3 @@
-// components/TopBarHero.tsx
 "use client";
 
 import { motion } from "framer-motion";
@@ -8,20 +7,18 @@ import Image from "next/image";
 export default function TopBarHero() {
   return (
     <section className="text-white pt-40 pb-24 px-6 bg-gradient-to-b from-black via-zinc-900 to-gray-950 relative overflow-hidden">
-      {/* SevAI Logo */}
       <div className="text-center">
         <Image
           src="https://sevaiapp.s3.us-east-1.amazonaws.com/ui/images/SevAICloudstormLogoDesign.png"
           alt="SevAI Logo"
           width={64}
           height={64}
-          priority
           unoptimized
+          priority
           className="mx-auto mb-4 drop-shadow-md rounded-full"
         />
       </div>
 
-      {/* Headline & Tagline */}
       <div className="max-w-6xl mx-auto text-center">
         <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight bg-gradient-to-r from-blue-500 to-purple-400 text-transparent bg-clip-text">
           Welcome to SevAI
@@ -35,14 +32,12 @@ export default function TopBarHero() {
         </p>
       </div>
 
-      {/* Feature Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto mt-16">
         <FeatureCard icon={<Rocket className="text-blue-400" />} title="Real-Time Dashboard" description="Monitor ingestion pipelines, search usage, and live data health." />
         <FeatureCard icon={<Settings2 className="text-blue-400" />} title="Modular Configuration" description="Customize AI behavior and connectors by role and department." />
         <FeatureCard icon={<ShieldCheck className="text-blue-400" />} title="Security First" description="PII masking, RBAC, and audit-ready logs built in from day one." />
       </div>
 
-      {/* Dashboard Grid */}
       <div className="mt-24 max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {[1, 2, 3, 4, 5, 6].map((i) => (
           <Image
@@ -51,14 +46,13 @@ export default function TopBarHero() {
             alt={`Preview ${i}`}
             width={400}
             height={250}
-            priority
             unoptimized
+            priority
             className="rounded-xl border border-zinc-800 shadow-md hover:scale-105 transition-transform duration-300"
           />
         ))}
       </div>
 
-      {/* Floating Robot Assistant */}
       <motion.div
         initial={{ opacity: 0, scale: 0.5, x: "-50%", y: "-50%" }}
         animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}

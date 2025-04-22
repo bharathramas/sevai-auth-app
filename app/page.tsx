@@ -1,37 +1,49 @@
 'use client';
 
-import dynamicImport from "next/dynamic";
-import Footer from "../components/Footer";
+import dynamicImport from 'next/dynamic';
+import Footer from '@/components/Footer';
+import Image from 'next/image';
 
-const AuthButtons = dynamicImport(() => import("../components/AuthButtons"), { ssr: false });
+const AuthButtons = dynamicImport(() => import('../components/AuthButtons'), {
+  ssr: false,
+});
 
-export const dynamic = "force-dynamic";
+export const dynamic = 'force-dynamic';
 
 export default function HomePage() {
   return (
-    <main className="bg-black text-white flex flex-col min-h-screen">
-      <div className="flex-grow flex flex-col items-center justify-center px-6 text-center relative">
-        {/* Login/Logout button top-right */}
+    <div className="min-h-screen flex flex-col justify-between bg-black text-white">
+      <div className="flex-grow flex items-center justify-center relative px-6 py-16 text-center">
+        {/* Top-right login */}
         <div className="absolute top-6 right-6">
           <AuthButtons />
         </div>
 
-        <h1 className="text-5xl sm:text-6xl font-extrabold tracking-tight leading-tight bg-gradient-to-r from-blue-500 to-purple-400 text-transparent bg-clip-text mb-6">
-          Meet SevAI
-        </h1>
+        {/* Optional Logo */}
+        {/* <Image
+          src="https://sevaiapp.s3.us-east-1.amazonaws.com/ui/images/SevAICloudstormLogoDesign.png"
+          alt="SevAI Logo"
+          width={64}
+          height={64}
+          unoptimized
+          priority
+          className="mx-auto mb-6"
+        /> */}
 
-        <p className="text-zinc-400 text-lg sm:text-xl max-w-2xl mb-4 leading-relaxed">
-          Your AI-native Enterprise Assistant.
-        </p>
-        <p className="text-zinc-400 text-lg sm:text-xl max-w-2xl mb-2 leading-relaxed">
-          Seamlessly monitor, support, and scale IT operations.
-        </p>
-        <p className="text-zinc-400 text-lg sm:text-xl max-w-2xl leading-relaxed">
-          Multilingual. Secure. Designed for Enterprises.
-        </p>
+        <div className="max-w-3xl">
+          <h1 className="text-4xl sm:text-6xl font-extrabold mb-6 tracking-tight leading-tight bg-gradient-to-r from-blue-500 to-purple-400 text-transparent bg-clip-text">
+            Meet SevAI
+          </h1>
+          <p className="text-lg sm:text-xl text-gray-300 mb-4">
+            Your AI-native Enterprise Assistant
+          </p>
+          <p className="text-md text-zinc-400 max-w-xl mx-auto">
+            Built on a modern stack — SevAI helps enterprises intelligently navigate operations, support, and decision-making.
+          </p>
+        </div>
       </div>
 
       <Footer />
-    </main>
+    </div>
   );
 }

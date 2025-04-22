@@ -41,13 +41,13 @@ export default function MasterConfigPage() {
     <main className="bg-black text-white min-h-screen flex flex-col">
       <Header />
 
-      <div className="flex-grow bg-gradient-to-br from-black via-zinc-900 to-gray-950 px-6 py-12">
-        <div className="max-w-6xl mx-auto text-center mb-12">
-          <h1 className="text-4xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-400">
+      <div className="flex-grow bg-gradient-to-br from-black via-zinc-900 to-gray-950 px-6 pt-28 pb-12">
+        <div className="max-w-5xl mx-auto text-center mb-10">
+          <h1 className="text-4xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-blue-300">
             Master Admin Configuration
           </h1>
           <p className="text-zinc-400 mt-2 text-sm">
-            Define reusable dropdown options for all customer-level config pages.
+            Define dropdown options step-by-step for each category.
           </p>
         </div>
 
@@ -70,7 +70,7 @@ export default function MasterConfigPage() {
             <button
               className="bg-gradient-to-r from-blue-500 to-blue-400 text-white p-4 rounded-full shadow-xl hover:from-blue-600 hover:to-blue-500 transition duration-300"
               onClick={handleSave}
-              title="Save Config"
+              title="Update Config"
             >
               <Save className="w-5 h-5" />
             </button>
