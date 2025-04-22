@@ -143,7 +143,7 @@ export default function ConfigOrganizationPage() {
                 renderSection={(key) => (
                   <ConfigSection
                     section={key}
-                    values={orgConfig[key] as string[]}
+                    values={Array.isArray(orgConfig[key]) ? orgConfig[key] : []}
                     onChange={(updatedValues) => handleSliderChange(key, updatedValues)}
                     placeholder="Enter sensitivity level"
                     labelPrefix=""
