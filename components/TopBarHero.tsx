@@ -8,15 +8,21 @@ import Image from "next/image";
 export default function TopBarHero() {
   return (
     <section className="text-white pt-40 pb-24 px-6 bg-gradient-to-b from-black via-zinc-900 to-gray-950 relative overflow-hidden">
-      <div className="max-w-6xl mx-auto text-center">
+      {/* SevAI Logo */}
+      <div className="text-center">
         <Image
           src="https://sevaiapp.s3.us-east-1.amazonaws.com/ui/images/SevAICloudstormLogoDesign.png"
           alt="SevAI Logo"
-          width={80}
-          height={80}
-          className="mx-auto mb-6"
+          width={64}
+          height={64}
+          priority
+          unoptimized
+          className="mx-auto mb-4 drop-shadow-md rounded-full"
         />
+      </div>
 
+      {/* Headline & Tagline */}
+      <div className="max-w-6xl mx-auto text-center">
         <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight bg-gradient-to-r from-blue-500 to-purple-400 text-transparent bg-clip-text">
           Welcome to SevAI
         </h1>
@@ -45,6 +51,8 @@ export default function TopBarHero() {
             alt={`Preview ${i}`}
             width={400}
             height={250}
+            priority
+            unoptimized
             className="rounded-xl border border-zinc-800 shadow-md hover:scale-105 transition-transform duration-300"
           />
         ))}
@@ -62,6 +70,8 @@ export default function TopBarHero() {
           alt="AI Assistant"
           width={140}
           height={140}
+          priority
+          unoptimized
           className="rounded-full opacity-90"
         />
       </motion.div>

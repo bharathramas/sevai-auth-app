@@ -1,4 +1,3 @@
-// components/Header.tsx
 "use client";
 
 import Link from "next/link";
@@ -9,7 +8,6 @@ const pages = [
   { href: "/ingest", label: "Ingest" },
   { href: "/search", label: "Search" },
   { href: "/dashboard", label: "Dashboard" },
-  { href: "/master/config", label: "Master Config" },
 ];
 
 export default function Header() {
@@ -26,17 +24,29 @@ export default function Header() {
         </Link>
 
         <nav className="flex items-center gap-6 text-sm font-medium">
+          {/* Config Dropdown */}
           <div className="relative group">
             <button className="text-white">Config ▾</button>
-            <div className="absolute left-0 mt-2 hidden group-hover:block bg-zinc-900 text-white rounded shadow-lg min-w-[160px] border border-zinc-700 z-50">
+            <div className="absolute left-0 mt-2 hidden group-hover:block bg-zinc-900 text-white rounded shadow-lg min-w-[180px] border border-zinc-700 z-50">
               <Link href="/config" className="block px-4 py-2 hover:bg-zinc-800">Organization</Link>
               <Link href="/config/connectors" className="block px-4 py-2 hover:bg-zinc-800">Connectors</Link>
               <Link href="/config/users" className="block px-4 py-2 hover:bg-zinc-800">Users</Link>
+              <div className="border-t border-zinc-700 my-1" />
+              <Link
+                href="/master/config"
+                className="block px-4 py-2 hover:bg-zinc-800 text-blue-400 font-semibold"
+              >
+                Master Admin
+              </Link>
             </div>
           </div>
 
           {pages.map(({ href, label }) => (
-            <Link key={href} href={href} className="text-white hover:text-blue-400 transition-colors">
+            <Link
+              key={href}
+              href={href}
+              className="text-white hover:text-blue-400 transition-colors"
+            >
               {label}
             </Link>
           ))}
