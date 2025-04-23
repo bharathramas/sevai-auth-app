@@ -7,7 +7,7 @@ import { UploadCloud, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { DefaultUser } from "next-auth";
-import { FileDropZone } from "../../components/FileDropZone";
+import { FileDropZone } from "../../../components/FileDropZone";
 
 // Extend session user type to include custom Cognito attributes
 interface CustomUser extends DefaultUser {
