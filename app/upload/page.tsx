@@ -21,6 +21,7 @@ export default function UploadPage() {
 
   const [files, setFiles] = useState<FileList | null>(null);
   const [uploading, setUploading] = useState(false);
+  const [sensitivity, setSensitivity] = useState("internal");
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFiles(e.target.files);
@@ -35,6 +36,7 @@ export default function UploadPage() {
       formData.append("files", files[i]);
     }
     formData.append("tenant_id", tenantId);
+	formData.append("sensitivity_level", sensitivity);
 
     const res = await fetch("/api/upload", {
       method: "POST",
@@ -70,6 +72,17 @@ export default function UploadPage() {
               className="block w-full text-white file:bg-blue-600 file:text-white file:rounded file:px-4 file:py-2 file:border-none"
             />
           </label>
+		  
+		  <label className="block mb-4">
+			  <span className="block text-sm font-medium mb-2">Sensitivity Level</span>
+			  <input
+				type="text"
+				value={sensitivity}
+				onChange={(e) => setSensitivity(e.target.value)}
+				placeholder="e.g. internal, confidential"
+				className="w-full bg-gray-800 text-white p-2 rounded border border-gray-700"
+			  />
+			</label>
 
           <Button onClick={handleUpload} disabled={uploading || !files} className="mt-4">
             {uploading ? <Loader2 className="animate-spin mr-2" /> : <UploadCloud className="mr-2" />} Upload
