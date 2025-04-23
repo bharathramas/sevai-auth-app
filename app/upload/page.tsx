@@ -6,9 +6,17 @@ import { UploadCloud, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner"; // ✅ Toast library
 
+// Extend session user type to include custom Cognito attributes
+interface CustomUser extends DefaultUser {
+  custom?: {
+    tenant_id?: string;
+  };
+}
+
 export default function UploadPage() {
   const { data: session } = useSession();
-  const tenantId = session?.user?.custom?.tenant_id; // Assuming Cognito `custom:tenant_id` is mapped as `custom.tenant_id`
+  const user = session?.user as CustomUser;
+  const tenantId = user?.custom?.tenant_id || 'unknown';
 
   const [files, setFiles] = useState<FileList | null>(null);
   const [uploading, setUploading] = useState(false);
