@@ -5,6 +5,7 @@ import { useState } from "react";
 import { UploadCloud, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner"; // ✅ Toast library
+import { DefaultUser } from "next-auth";
 
 // Extend session user type to include custom Cognito attributes
 interface CustomUser extends DefaultUser {
