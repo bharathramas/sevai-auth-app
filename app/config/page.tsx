@@ -140,15 +140,18 @@ export default function ConfigOrganizationPage() {
               </p>
               <ConfigSlider
                 sections={[{ key: "sensitivity_levels", title: "" }]}
-                renderSection={(key) => (
-                  <ConfigSection
-                    section={key}
-                    values={Array.isArray(value) ? value : []}
-                    onChange={(updatedValues) => handleSliderChange(key, updatedValues)}
-                    placeholder="Enter sensitivity level"
-                    labelPrefix=""
-                  />
-                )}
+                renderSection={(key) => {
+                  const current = orgConfig[key];
+                  return (
+                    <ConfigSection
+                      section={key}
+                      values={Array.isArray(current) ? current : []}
+                      onChange={(updatedValues) => handleSliderChange(key, updatedValues)}
+                      placeholder="Enter sensitivity level"
+                      labelPrefix=""
+                    />
+                  );
+                }}
                 showDots={false}
               />
             </div>
