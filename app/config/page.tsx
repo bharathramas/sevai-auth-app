@@ -14,8 +14,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import ConfigSlider from "@/components/ConfigSlider";
-import ConfigSection from "@/components/ConfigSection";
 
 const defaultOrgConfig = {
   org_name: "Acme Corp",
@@ -24,7 +22,7 @@ const defaultOrgConfig = {
   contact_name: "",
   contact_phone: "",
   contact_email: "",
-  sensitivity_levels: ["Low", "Medium", "High"], // ✅ New field
+  sensitivity_levels: "Low,Medium,High", // ✅ CSV format
 };
 
 export default function ConfigOrganizationPage() {
@@ -33,11 +31,6 @@ export default function ConfigOrganizationPage() {
 
   function handleChange(field: string, value: string) {
     setOrgConfig((prev) => ({ ...prev, [field]: value }));
-    setHasChanges(true);
-  }
-
-  function handleSliderChange(field: string, values: string[]) {
-    setOrgConfig((prev) => ({ ...prev, [field]: values }));
     setHasChanges(true);
   }
 
@@ -132,28 +125,16 @@ export default function ConfigOrganizationPage() {
               </div>
             </div>
 
-            {/* ✅ Sensitivity Levels Config Slider */}
-            <div className="pt-10">
-              <h2 className="text-xl font-bold text-blue-400 mb-2">Sensitivity Levels</h2>
-              <p className="text-sm text-zinc-400 mb-4">
-                Define document sensitivity levels for this organization. These will be selectable on upload.
-              </p>
-              <ConfigSlider
-                sections={[{ key: "sensitivity_levels", title: "" }]}
-                renderSection={(key) => {
-                  const current = orgConfig[key];
-                  return (
-                    <ConfigSection
-                      section={key}
-                      values={Array.isArray(current) ? current : []}
-                      onChange={(updatedValues) => handleSliderChange(key, updatedValues)}
-                      placeholder="Enter sensitivity level"
-                      labelPrefix=""
-                    />
-                  );
-                }}
-                showDots={false}
+            {/* ✅ CSV Sensitivity Level Input */}
+            <div>
+              <Label className="text-white mb-1 block">Sensitivity Levels</Label>
+              <Input
+                value={orgConfig.sensitivity_levels}
+                onChange={(e) => handleChange("sensitivity_levels", e.target.value)}
+                placeholder="Enter comma-separated levels (e.g., Low,Medium,High)"
+                className="bg-zinc-800 border-zinc-700 text-white"
               />
+              <p className="text-sm text-zinc-400 mt-1">Use commas to separate values. These will show up in Upload dropdown.</p>
             </div>
           </div>
         </div>
