@@ -1,11 +1,13 @@
+// app/upload/page.tsx
 'use client';
 
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 import { UploadCloud, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { toast } from "sonner"; // ✅ Toast library
+import { toast } from "sonner";
 import { DefaultUser } from "next-auth";
+import { FileDropZone } from "@/components/FileDropZone";
 
 // Extend session user type to include custom Cognito attributes
 interface CustomUser extends DefaultUser {
@@ -19,24 +21,21 @@ export default function UploadPage() {
   const user = session?.user as CustomUser;
   const tenantId = user?.custom?.tenant_id || 'unknown';
 
-  const [files, setFiles] = useState<FileList | null>(null);
+  const [files, setFiles] = useState<File[] | null>(null);
   const [uploading, setUploading] = useState(false);
   const [sensitivity, setSensitivity] = useState("internal");
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFiles(e.target.files);
-  };
 
   const handleUpload = async () => {
     if (!files || !tenantId) return;
     setUploading(true);
 
     const formData = new FormData();
-    for (let i = 0; i < files.length; i++) {
-      formData.append("files", files[i]);
-    }
+    files.forEach((file) => formData.append("files", file));
     formData.append("tenant_id", tenantId);
-	formData.append("sensitivity_level", sensitivity);
+    formData.append("sensitivity_level", sensitivity);
+
+    console.log("🚀 Uploading files:", files);
+    console.log("🧾 Metadata:", { tenantId, sensitivity });
 
     const res = await fetch("/api/upload", {
       method: "POST",
@@ -61,30 +60,21 @@ export default function UploadPage() {
           Supported formats: <strong>PDF</strong>, <strong>DOCX</strong>. Files will be saved to <code>s3://sevaiapp/sourcefiles/</code> and processed for indexing.
         </p>
 
-        <div className="border border-gray-700 p-6 rounded-lg bg-gray-900">
-          <label className="block mb-4">
-            <span className="block text-sm font-medium mb-2">Choose documents</span>
+        <div className="border border-gray-700 p-6 rounded-lg bg-gray-900 space-y-4">
+          <FileDropZone onFilesSelected={(f) => setFiles(f)} />
+
+          <label className="block">
+            <span className="block text-sm font-medium mb-2">Sensitivity Level</span>
             <input
-              type="file"
-              multiple
-              accept="application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-              onChange={handleFileChange}
-              className="block w-full text-white file:bg-blue-600 file:text-white file:rounded file:px-4 file:py-2 file:border-none"
+              type="text"
+              value={sensitivity}
+              onChange={(e) => setSensitivity(e.target.value)}
+              placeholder="e.g. internal, confidential"
+              className="w-full bg-gray-800 text-white p-2 rounded border border-gray-700"
             />
           </label>
-		  
-		  <label className="block mb-4">
-			  <span className="block text-sm font-medium mb-2">Sensitivity Level</span>
-			  <input
-				type="text"
-				value={sensitivity}
-				onChange={(e) => setSensitivity(e.target.value)}
-				placeholder="e.g. internal, confidential"
-				className="w-full bg-gray-800 text-white p-2 rounded border border-gray-700"
-			  />
-			</label>
 
-          <Button onClick={handleUpload} disabled={uploading || !files} className="mt-4">
+          <Button onClick={handleUpload} disabled={uploading || !files} className="mt-2">
             {uploading ? <Loader2 className="animate-spin mr-2" /> : <UploadCloud className="mr-2" />} Upload
           </Button>
         </div>
