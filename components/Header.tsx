@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
 
 const pages = [
-  { href: "/search", label: "Search" },
+  { href: "/chat", label: "Chat" },
   { href: "/dashboard", label: "Dashboard" },
 ];
 
