@@ -1,3 +1,4 @@
+
 'use client';
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -9,7 +10,9 @@ import {
   History,
   Gauge,
   Megaphone,
-  ChevronRight
+  MessageSquare,
+  ChevronRight,
+  Menu
 } from "lucide-react";
 import { motion, useAnimation } from "framer-motion";
 import Header from "@/components/Header";
@@ -60,7 +63,6 @@ export default function DashboardPage() {
   const role = session?.user?.["custom:role"] || "customer_user";
   const controls = useAnimation();
   const [showBubble, setShowBubble] = useState(true);
-  const [collapsed, setCollapsed] = useState(true);
   const [chartSlide, setChartSlide] = useState(0);
 
   useEffect(() => {
@@ -74,23 +76,34 @@ export default function DashboardPage() {
   }, [controls]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white flex">
-      <div className={`fixed top-0 right-0 h-full z-50 bg-black/70 backdrop-blur-xl border-l border-white/10 transition-all duration-500 ease-in-out ${collapsed ? 'w-16' : 'w-64'}`}>
-        <button
-          onClick={() => setCollapsed(!collapsed)}
-          className="absolute top-4 left-2 text-white text-xs bg-zinc-800 px-2 py-1 rounded hover:bg-zinc-700"
-        >
-          {collapsed ? '▶' : '◀'}
-        </button>
-        {!collapsed && <Header />}
+    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white flex font-orbitron">
+      <div className="fixed top-4 right-4 z-50 group">
+        <div className="bg-zinc-900 p-2 rounded-full border border-white/20 hover:bg-zinc-800 cursor-pointer">
+          <Menu className="w-6 h-6 text-white" />
+        </div>
+        <div className="absolute top-10 right-0 w-64 bg-white/10 backdrop-blur-md text-white shadow-xl border border-white/20 rounded-xl p-4 transition-all duration-500 ease-out opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100">
+          <h3 className="font-bold text-sm mb-3 text-blue-400">Navigation</h3>
+          <ul className="space-y-2 text-sm">
+            <li><Link href="/dashboard" className="hover:text-blue-400 transition-colors duration-300">📊 Dashboard</Link></li>
+            <li><Link href="/chat" className="hover:text-blue-400 transition-colors duration-300">💬 Chat</Link></li>
+            <li><Link href="/upload" className="hover:text-blue-400 transition-colors duration-300">📁 Upload</Link></li>
+            <li><Link href="/config" className="hover:text-blue-400 transition-colors duration-300">⚙️ Config</Link></li>
+            <li><Link href="/master/config" className="hover:text-blue-400 transition-colors duration-300">👑 Master Admin</Link></li>
+          </ul>
+        </div>
       </div>
 
-      <div className={`flex-1 px-4 sm:px-6 md:px-8 py-10 transition-all duration-500 ${collapsed ? 'lg:mr-16' : 'lg:mr-64'}`}>
-        <div className="mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold mb-2 text-white drop-shadow-lg">Welcome to SevAI Dashboard</h1>
-          <p className="text-gray-300 text-base sm:text-lg">Your enterprise AI insights, actions, and agents in one view.</p>
+      <div className="flex-1 px-4 sm:px-6 md:px-8 py-10">
+        <div className="mb-8 text-center">
+          <h1 className="text-4xl sm:text-6xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-blue-500 to-purple-400 text-transparent bg-clip-text drop-shadow-lg animate-fade-in">
+            WELCOME TO SEVAI INTELLIGENCE DASHBOARD
+          </h1>
+          <p className="text-gray-300 text-base sm:text-lg mt-2 max-w-2xl mx-auto">
+            Your enterprise AI insights, actions, and agents in one view.
+          </p>
         </div>
 
+        {/* Full content continues with cards, chart slider, and chatbot */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           <Card><CardHeader><CardTitle>Active Tickets</CardTitle></CardHeader><CardContent><p className="text-3xl font-bold text-blue-400">128</p></CardContent></Card>
           <Card><CardHeader><CardTitle>Flagged Responses</CardTitle></CardHeader><CardContent><p className="text-3xl font-bold text-red-400">7</p></CardContent></Card>
@@ -221,6 +234,7 @@ export default function DashboardPage() {
             </div>
           </Link>
         </motion.div>
+		
       </div>
     </div>
   );
