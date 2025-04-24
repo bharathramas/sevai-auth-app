@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useState } from 'react';
 import {
   LayoutDashboard,
   Building,
@@ -10,6 +11,8 @@ import {
   Settings,
   UploadCloud,
   ServerCog,
+  ChevronsLeft,
+  ChevronsRight,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -25,22 +28,46 @@ const navItems = [
 
 export default function SidebarNav() {
   const pathname = usePathname();
+  const [collapsed, setCollapsed] = useState(true);
 
   return (
-    <aside className="w-64 fixed top-0 left-0 h-screen bg-zinc-950 border-r border-zinc-800 px-6 py-10">
-      <h2 className="text-2xl font-bold text-blue-500 mb-8">SevAI</h2>
-      <nav className="flex flex-col gap-4">
+    <aside
+      className={cn(
+        'fixed top-0 left-0 h-screen transition-all duration-300 ease-in-out z-50',
+        collapsed ? 'w-16 px-2' : 'w-64 px-6'
+      )}
+      style={{
+        backdropFilter: 'blur(10px)',
+        backgroundColor: 'rgba(24, 24, 27, 0.6)', // glassmorphism: black with opacity
+        borderRight: '1px solid rgba(255, 255, 255, 0.1)',
+      }}
+    >
+      {/* Toggle Button */}
+      <div className="flex justify-end pt-4 pb-2">
+        <button onClick={() => setCollapsed(!collapsed)} className="text-zinc-400 hover:text-white">
+          {collapsed ? <ChevronsRight size={18} /> : <ChevronsLeft size={18} />}
+        </button>
+      </div>
+
+      {/* Logo / Brand */}
+      {!collapsed && (
+        <h2 className="text-2xl font-bold text-blue-500 mb-8 transition-opacity duration-300">SevAI</h2>
+      )}
+
+      {/* Navigation */}
+      <nav className="flex flex-col gap-3">
         {navItems.map(({ href, label, icon }) => (
           <Link
             key={href}
             href={href}
             className={cn(
-              'flex items-center gap-3 text-sm font-medium rounded px-3 py-2 transition-colors hover:bg-zinc-800 hover:text-white',
-              pathname === href ? 'bg-zinc-800 text-white' : 'text-zinc-400'
+              'flex items-center rounded px-3 py-2 text-sm font-medium transition-colors hover:bg-zinc-800 hover:text-white',
+              pathname === href ? 'bg-zinc-800 text-white' : 'text-zinc-400',
+              collapsed ? 'justify-center' : 'gap-3'
             )}
           >
             {icon}
-            <span>{label}</span>
+            {!collapsed && <span>{label}</span>}
           </Link>
         ))}
       </nav>
