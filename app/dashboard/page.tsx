@@ -1,3 +1,4 @@
+// Full Dashboard Page with Hover Menu, Charts, and Floating Chatbot
 
 'use client';
 
@@ -77,6 +78,7 @@ export default function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white flex font-orbitron">
+      {/* Hover icon to show navigation */}
       <div className="fixed top-4 right-4 z-50 group">
         <div className="bg-zinc-900 p-2 rounded-full border border-white/20 hover:bg-zinc-800 cursor-pointer">
           <Menu className="w-6 h-6 text-white" />
@@ -84,6 +86,7 @@ export default function DashboardPage() {
         <div className="absolute top-10 right-0 w-64 bg-white/10 backdrop-blur-md text-white shadow-xl border border-white/20 rounded-xl p-4 transition-all duration-500 ease-out opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100">
           <h3 className="font-bold text-sm mb-3 text-blue-400">Navigation</h3>
           <ul className="space-y-2 text-sm">
+            <li><Link href="/private" className="hover:text-blue-400 transition-colors duration-300">🏠 Home</Link></li>
             <li><Link href="/dashboard" className="hover:text-blue-400 transition-colors duration-300">📊 Dashboard</Link></li>
             <li><Link href="/chat" className="hover:text-blue-400 transition-colors duration-300">💬 Chat</Link></li>
             <li><Link href="/upload" className="hover:text-blue-400 transition-colors duration-300">📁 Upload</Link></li>

@@ -6,7 +6,7 @@ import Image from "next/image";
 
 export default function TopBarHero() {
   return (
-    <section className="text-white pt-40 pb-24 px-6 bg-gradient-to-b from-black via-zinc-900 to-gray-950 relative overflow-hidden">
+    <section className="font-orbitron text-white pt-40 pb-24 px-6 bg-gradient-to-b from-black via-zinc-900 to-gray-950 relative overflow-hidden">
       <div className="text-center">
         <Image
           src="https://sevaiapp.s3.us-east-1.amazonaws.com/ui/images/SevAICloudstormLogoDesign.png"
