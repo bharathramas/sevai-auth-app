@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useContext } from 'react';
 import {
   LayoutDashboard,
   Building,
@@ -15,7 +14,6 @@ import {
   ChevronsRight,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { SidebarContext } from '@/app/config/layout';
 
 const navItems = [
   { href: '/dashboard', label: 'Dashboard', icon: <LayoutDashboard className="w-4 h-4" /> },
@@ -27,9 +25,14 @@ const navItems = [
   { href: '/master/config', label: 'Master Config', icon: <Settings className="w-4 h-4 text-blue-400" /> },
 ];
 
-export default function SidebarNav() {
+export default function SidebarNav({
+  collapsed,
+  toggle,
+}: {
+  collapsed: boolean;
+  toggle: () => void;
+}) {
   const pathname = usePathname();
-  const { collapsed, toggle } = useContext(SidebarContext);
 
   return (
     <aside
