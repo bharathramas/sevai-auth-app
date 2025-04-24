@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { useContext } from 'react';
 import {
   LayoutDashboard,
   Building,
@@ -15,6 +15,7 @@ import {
   ChevronsRight,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { SidebarContext } from '@/app/config/layout';
 
 const navItems = [
   { href: '/dashboard', label: 'Dashboard', icon: <LayoutDashboard className="w-4 h-4" /> },
@@ -28,7 +29,7 @@ const navItems = [
 
 export default function SidebarNav() {
   const pathname = usePathname();
-  const [collapsed, setCollapsed] = useState(true);
+  const { collapsed, toggle } = useContext(SidebarContext);
 
   return (
     <aside
@@ -38,13 +39,13 @@ export default function SidebarNav() {
       )}
       style={{
         backdropFilter: 'blur(10px)',
-        backgroundColor: 'rgba(24, 24, 27, 0.6)', // glassmorphism: black with opacity
+        backgroundColor: 'rgba(24, 24, 27, 0.6)',
         borderRight: '1px solid rgba(255, 255, 255, 0.1)',
       }}
     >
       {/* Toggle Button */}
       <div className="flex justify-end pt-4 pb-2">
-        <button onClick={() => setCollapsed(!collapsed)} className="text-zinc-400 hover:text-white">
+        <button onClick={toggle} className="text-zinc-400 hover:text-white">
           {collapsed ? <ChevronsRight size={18} /> : <ChevronsLeft size={18} />}
         </button>
       </div>
