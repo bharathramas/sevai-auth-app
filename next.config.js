@@ -26,10 +26,6 @@ const nextConfig = {
       },
     ],
   },
-   webpack: (config) => {
-    config.resolve.extensions.push('.jsx', '.js'); // 👈 THIS lets you import .jsx files cleanly
-    return config;
-  },
 };
 
 module.exports = nextConfig;
