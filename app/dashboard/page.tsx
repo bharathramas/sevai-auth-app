@@ -77,10 +77,8 @@ export default function DashboardPage() {
   }, [controls]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white flex font-orbitron">
-    <div className="mb-6 w-full">
-      <Header />
-    </div>
+    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white flex flex-col font-orbitron">
+    <Header />
 
       {/* Hover icon to show navigation */}
       <div className="fixed top-4 right-4 z-50 group">
