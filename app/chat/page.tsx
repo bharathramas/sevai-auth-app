@@ -11,6 +11,7 @@ import { Menu, RefreshCw, ThumbsUp, ThumbsDown } from "lucide-react";
 export default function ChatPage() {
   const { data: session } = useSession();
   const firstName = session?.user?.["custom:first_name"] || session?.user?.name?.split(" ")[0] || "there";
+  const tenantId = session?.user?.["custom:tenant_id"] || "public";
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<any[]>([]);
   const [showBubble, setShowBubble] = useState(true);
@@ -20,11 +21,34 @@ export default function ChatPage() {
     return () => clearTimeout(timer);
   }, []);
 
-  const sendMessage = () => {
+  const sendMessage = async () => {
     if (!input.trim()) return;
-    const newMessage = { role: "user", text: input };
-    setMessages([...messages, newMessage, { role: "ai", text: "Let me think about that...", showActions: true }]);
-    setInput("");
+    const userMessage = { role: "user", text: input };
+    setMessages((prev) => [...prev, userMessage]);
+
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/search`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ query: input, tenant_id: tenantId })
+      });
+
+      const data = await response.json();
+      const resultText = data.results?.[0]?.text || "No relevant results found.";
+      const docCount = data.doc_count || 0;
+      const responseTime = data.response_time_ms || 0;
+      const aiMessage = {
+        role: "ai",
+        text: `${resultText}\n\n📊 Results: ${docCount} • ⏱ ${responseTime}ms`,
+        showActions: true
+      };
+      setMessages((prev) => [...prev, aiMessage]);
+    } catch (err) {
+      console.error("Search error:", err);
+      setMessages((prev) => [...prev, { role: "ai", text: "⚠️ Error fetching results.", showActions: true }]);
+    } finally {
+      setInput("");
+    }
   };
 
   const regenerateMessage = (index: number) => {
