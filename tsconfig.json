@@ -15,7 +15,8 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./*"],
-      "@/components/*": ["components/*"]
+      "@/components/*": ["components/*"],
+      "@/sevai-designer/*": ["sevai-designer/src/*"]
     },
     "plugins": [
       {

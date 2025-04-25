@@ -41,6 +41,7 @@ export default function TopRightMenu() {
             <li><Link href="/private" className="hover:text-blue-400">🏠 Home</Link></li>
             <li><Link href="/dashboard" className="hover:text-blue-400">📊 Dashboard</Link></li>
             <li><Link href="/chat" className="hover:text-blue-400">💬 Chat</Link></li>
+            <li><Link href="/designer" className="hover:text-blue-400">🏠 Designer</Link></li>
             <li><Link href="/upload" className="hover:text-blue-400">📁 Upload</Link></li>
             {canAccessConfig && (
               <li><Link href="/config" className="hover:text-blue-400">⚙️ Config</Link></li>
