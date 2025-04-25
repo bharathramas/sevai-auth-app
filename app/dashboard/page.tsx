@@ -80,25 +80,7 @@ export default function DashboardPage() {
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white flex flex-col font-sans">
     <Header />
 
-      {/* Hover icon to show navigation */}
-      <div className="fixed top-4 right-4 z-50 group">
-        <div className="bg-zinc-900 p-2 rounded-full border border-white/20 hover:bg-zinc-800 cursor-pointer">
-          <Menu className="w-6 h-6 text-white" />
-        </div>
-        <div className="absolute top-10 right-0 w-64 bg-white/10 backdrop-blur-md text-white shadow-xl border border-white/20 rounded-xl p-4 transition-all duration-500 ease-out opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100">
-          <h3 className="font-bold text-sm mb-3 text-blue-400">Navigation</h3>
-          <ul className="space-y-2 text-sm">
-            <li><Link href="/private" className="hover:text-blue-400 transition-colors duration-300">🏠 Home</Link></li>
-            <li><Link href="/dashboard" className="hover:text-blue-400 transition-colors duration-300">📊 Dashboard</Link></li>
-            <li><Link href="/chat" className="hover:text-blue-400 transition-colors duration-300">💬 Chat</Link></li>
-            <li><Link href="/upload" className="hover:text-blue-400 transition-colors duration-300">📁 Upload</Link></li>
-            <li><Link href="/config" className="hover:text-blue-400 transition-colors duration-300">⚙️ Config</Link></li>
-            <li><Link href="/master/config" className="hover:text-blue-400 transition-colors duration-300">👑 Master Admin</Link></li>
-          </ul>
-        </div>
-      </div>
-
-      <div className="flex-1 px-4 sm:px-6 md:px-8 py-10">
+      <div className="pt-16 flex-1 px-4 sm:px-6 md:px-8 py-10">
         <div className="mb-8 text-center">
           <h1 className="text-4xl sm:text-6xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-blue-500 to-purple-400 text-transparent bg-clip-text drop-shadow-lg animate-fade-in">
             WELCOME TO SEVAI INTELLIGENCE DASHBOARD

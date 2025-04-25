@@ -1,7 +1,9 @@
+// components/Header.tsx
 'use client';
 
 import Link from "next/link";
-import { useSession, signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
+import TopRightMenu from "./TopRightMenu";
 
 const pages = [
   { href: "/chat", label: "Chat" },
@@ -10,36 +12,22 @@ const pages = [
 
 export default function Header() {
   const { data: session } = useSession();
+  const firstName = session?.user?.["custom:first_name"] || session?.user?.name?.split(" ")[0] || "User";
 
   return (
-    <header className="fixed top-0 z-50 w-full bg-black/80 backdrop-blur-lg border-b border-zinc-800 shadow-md">
+    <header className="fixed top-0 z-50 w-full bg-gradient-to-r from-black via-zinc-900 to-black backdrop-blur-lg border-b border-zinc-800 shadow-lg">
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
-        <Link
-          href="/"
-          className="text-3xl font-extrabold tracking-tight bg-gradient-to-r from-blue-500 to-purple-400 text-transparent bg-clip-text"
-        >
-          SevAI
-        </Link>
+        <div className="flex items-center gap-4">
+          <Link
+            href="/"
+            className="text-3xl font-extrabold tracking-tight bg-gradient-to-r from-blue-500 via-cyan-400 to-purple-500 text-transparent bg-clip-text drop-shadow"
+          >
+            SevAI
+          </Link>
+          <span className="text-sm text-white/60 hidden sm:inline">Empowering Enterprise Intelligence</span>
+        </div>
 
-        <nav className="flex items-center gap-6 text-sm font-medium">
-          {/* Config Dropdown */}
-          <div className="relative group">
-            <button className="text-white">Config ▾</button>
-            <div className="absolute left-0 mt-2 group-hover:block group-focus-within:block bg-zinc-900 text-white rounded shadow-lg min-w-[180px] border border-zinc-700 z-50 hidden">
-              <Link href="/config" className="block px-4 py-2 hover:bg-zinc-800">Organization</Link>
-              <Link href="/config/connectors" className="block px-4 py-2 hover:bg-zinc-800">Connectors</Link>
-              <Link href="/config/users" className="block px-4 py-2 hover:bg-zinc-800">Users</Link>
-              <Link href="/upload" className="block px-4 py-2 hover:bg-zinc-800">Upload</Link>
-              <div className="border-t border-zinc-700 my-1" />
-              <Link
-                href="/master/config"
-                className="block px-4 py-2 hover:bg-zinc-800 text-blue-400 font-semibold"
-              >
-                Master Admin
-              </Link>
-            </div>
-          </div>
-
+        <nav className="flex items-center gap-4 text-sm font-medium">
           {pages.map(({ href, label }) => (
             <Link
               key={href}
@@ -50,18 +38,9 @@ export default function Header() {
             </Link>
           ))}
 
-          {session?.user && (
-            <button
-              onClick={() =>
-                signOut({
-                  callbackUrl: `${window.location.origin}/`,
-                })
-              }
-              className="ml-4 text-white text-sm px-3 py-1 border border-white rounded hover:bg-white hover:text-black transition"
-            >
-              Sign out
-            </button>
-          )}
+          <span className="hidden sm:inline text-xs text-white/60 italic">Welcome, {firstName}</span>
+
+          <TopRightMenu />
         </nav>
       </div>
     </header>
