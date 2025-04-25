@@ -77,7 +77,7 @@ export default function DashboardPage() {
   }, [controls]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white flex flex-col font-orbitron">
+    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white flex flex-col font-sans">
     <Header />
 
       {/* Hover icon to show navigation */}

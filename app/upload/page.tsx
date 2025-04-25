@@ -51,7 +51,7 @@ export default function UploadPage() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white p-6 font-orbitron">
+    <div className="min-h-screen bg-black text-white p-6 font-sans">
       <div className="max-w-3xl mx-auto">
         <h1 className="text-4xl font-bold mb-6 text-blue-500">
           Upload Documents to SevAI

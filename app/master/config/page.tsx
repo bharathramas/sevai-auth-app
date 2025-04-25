@@ -38,7 +38,7 @@ export default function MasterConfigPage() {
   }
 
   return (
-    <main className="bg-black text-white min-h-screen flex flex-col font-orbitron">
+    <main className="bg-black text-white min-h-screen flex flex-col font-sans">
       <Header />
 
       <div className="flex-grow bg-gradient-to-br from-black via-zinc-900 to-gray-950 px-6 pt-28 pb-12">

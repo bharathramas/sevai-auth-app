@@ -58,7 +58,7 @@ export default function ChatPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-black text-white font-orbitron">
+    <div className="min-h-screen flex flex-col bg-black text-white font-sans">
       <Header />
 
       {/* Floating Nav Menu */}

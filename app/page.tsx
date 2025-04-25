@@ -12,7 +12,7 @@ export const dynamic = 'force-dynamic';
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen flex flex-col justify-between bg-black text-white font-orbitron">
+    <div className="min-h-screen flex flex-col justify-between bg-black text-white font-sans">
       <div className="flex-grow flex items-center justify-center relative px-6 py-16 text-center">
         {/* Top-right login */}
         <div className="absolute top-6 right-6">

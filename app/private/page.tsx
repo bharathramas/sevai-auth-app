@@ -7,7 +7,7 @@ import Footer from '@/components/Footer';
 
 export default function PrivateHome() {
   return (
-    <main className="bg-black text-white min-h-screen flex flex-col font-orbitron">
+    <main className="bg-black text-white min-h-screen flex flex-col font-sans">
       <Header />
       <div className="flex-grow">
         <TopBarHero />

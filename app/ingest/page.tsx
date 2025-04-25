@@ -58,7 +58,7 @@ export default function IngestPage() {
   };
 
   return (
-    <main className="min-h-screen bg-black text-white flex flex-col font-orbitron">
+    <main className="min-h-screen bg-black text-white flex flex-col font-sans">
       <Header />
 
       <div className="flex-grow pt-28 pb-16 px-6 bg-gradient-to-br from-black via-zinc-900 to-zinc-950">

@@ -8,6 +8,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
+        sans: ['Outfit', 'ui-sans-serif', 'system-ui'],  // Default font
         orbitron: ['Orbitron', 'sans-serif'],
       },
     },
