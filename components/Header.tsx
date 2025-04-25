@@ -12,10 +12,11 @@ const pages = [
 
 export default function Header() {
   const { data: session } = useSession();
-  const firstName = session?.user?.["custom:first_name"] || session?.user?.name?.split(" ")[0] || "User";
+  const firstName = session?.user?.["custom:first_name"] || session?.user?.name?.split(" ")[0] || "there";
+  console.log("SESSION →", session)
 
   return (
-    <header className="fixed top-0 z-50 w-full bg-gradient-to-r from-black via-zinc-900 to-black backdrop-blur-lg border-b border-zinc-800 shadow-lg">
+    <header className="fixed top-0 z-50 w-full h-16 bg-gradient-to-r from-black via-zinc-900 to-black backdrop-blur-lg border-b border-zinc-800 shadow-lg">
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
         <div className="flex items-center gap-4">
           <Link
