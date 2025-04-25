@@ -78,6 +78,10 @@ export default function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white flex font-orbitron">
+    <div className="mb-6 w-full">
+      <Header />
+    </div>
+
       {/* Hover icon to show navigation */}
       <div className="fixed top-4 right-4 z-50 group">
         <div className="bg-zinc-900 p-2 rounded-full border border-white/20 hover:bg-zinc-800 cursor-pointer">
