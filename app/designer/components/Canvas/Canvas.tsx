@@ -26,7 +26,7 @@ const nodeTypes = {
   tool: ToolNode,
 };
 
-export default function Canvas() {
+export default function Canvas({ initialNodes = [], initialEdges = [] }: { initialNodes: Node[]; initialEdges: Edge[] }) {
   const [nodes, setNodes, onNodesChange] = useNodesState<Node[]>([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState<Edge[]>([]);
 

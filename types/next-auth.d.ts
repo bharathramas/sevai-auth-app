@@ -7,7 +7,8 @@ declare module "next-auth" {
       email?: string;
       image?: string;
       role?: string;
-      tenant_id?: string;
+      "custom:tenant_id"?: string;
+      sub?: string;
     };
   }
 
