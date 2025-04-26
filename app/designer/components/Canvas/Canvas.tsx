@@ -105,9 +105,17 @@ export default function Canvas({ initialNodes = [], initialEdges = [] }: { initi
           onDragOver={onDragOver}
           fitView
           nodeTypes={nodeTypes}
+
+          panOnDrag={true}
+          zoomOnScroll={true}
+          zoomOnPinch={true}
+          panOnScroll={true}
+          snapToGrid={true}
+          snapGrid={[16, 16]} 
+
         >
           <Background variant={BackgroundVariant.Dots} gap={24} size={1.5} color="#333" />
-          <Controls showInteractive={false} position="bottom-right" />
+          <Controls showInteractive={false} showZoom={true} showFitView={true} position="bottom-right" />
           <MiniMap
             nodeColor={() => '#4F46E5'}
             nodeStrokeWidth={3}

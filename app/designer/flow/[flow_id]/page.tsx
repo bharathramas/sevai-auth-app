@@ -44,9 +44,13 @@ export default function DesignerFlowPage() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-screen text-white">
-        Loading Flow...
-      </div>
+      <div className="flex w-full h-full">
+       <Sidebar />
+       <div className="flex-1 relative">
+        <Canvas initialNodes={initialNodes} initialEdges={initialEdges} />
+        <NodeSettings selectedNode={selectedNode} onUpdateNode={handleNodeUpdate} />
+       </div>
+     </div>
     );
   }
 

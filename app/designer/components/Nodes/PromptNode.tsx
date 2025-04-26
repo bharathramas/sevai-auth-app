@@ -14,6 +14,17 @@ export default function PromptNode({ data, selected, id }: NodeProps) {
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
     >
+
+
+      {/* Target Handle (incoming connections) */}
+      <Handle
+        type="target"
+        position={Position.Top}
+        id="input"
+        style={{ background: '#10B981', borderRadius: '50%' }}
+      />
+
+
       {/* Title */}
       <div className="flex items-center gap-2 mb-4">
         <Sparkles className="w-5 h-5 text-blue-400" />
