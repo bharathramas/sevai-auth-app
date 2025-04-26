@@ -6,6 +6,7 @@ import { Settings } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
+// Reusable Input Field
 function InputField({ label, value, field, handleChange }: { label: string; value?: string; field: string; handleChange: (field: string, value: string) => void }) {
   return (
     <div className="mb-4">
@@ -20,6 +21,7 @@ function InputField({ label, value, field, handleChange }: { label: string; valu
   );
 }
 
+// Reusable Select Field
 function SelectField({ label, value, field, handleChange, options }: { label: string; value?: string; field: string; handleChange: (field: string, value: string) => void; options: string[] }) {
   return (
     <div className="mb-4">
@@ -42,7 +44,6 @@ function SelectField({ label, value, field, handleChange, options }: { label: st
     </div>
   );
 }
-
 
 export default function ToolNode({ data, selected, id }: NodeProps) {
   const handleChange = (field: string, value: string) => {
@@ -76,11 +77,7 @@ export default function ToolNode({ data, selected, id }: NodeProps) {
           </>
         );
       case 'file':
-        return (
-          <>
-            <InputField label="File Path" value={data.filePath} field="filePath" handleChange={handleChange} />
-          </>
-        );
+        return <InputField label="File Path" value={data.filePath} field="filePath" handleChange={handleChange} />;
       case 'email':
         return (
           <>
@@ -91,11 +88,7 @@ export default function ToolNode({ data, selected, id }: NodeProps) {
           </>
         );
       case 'slack':
-        return (
-          <>
-            <InputField label="Slack Webhook URL" value={data.webhookUrl} field="webhookUrl" handleChange={handleChange} />
-          </>
-        );
+        return <InputField label="Slack Webhook URL" value={data.webhookUrl} field="webhookUrl" handleChange={handleChange} />;
       case 'sql':
         return (
           <>
@@ -119,28 +112,32 @@ export default function ToolNode({ data, selected, id }: NodeProps) {
           </>
         );
       case 'delay':
-        return (
-          <>
-            <InputField label="Delay in Seconds" value={data.delaySeconds} field="delaySeconds" handleChange={handleChange} />
-          </>
-        );
+        return <InputField label="Delay in Seconds" value={data.delaySeconds} field="delaySeconds" handleChange={handleChange} />;
       default:
-        return <div className="text-sm text-zinc-400">Select Tool Type...</div>;
+        return <div className="text-sm text-zinc-400">Select a Tool Type...</div>;
     }
   };
 
   return (
     <motion.div
-      className={`w-80 rounded-xl border p-4 shadow-md transition 
-        ${selected ? 'border-blue-500 shadow-blue-500/20' : 'border-zinc-700'} 
-        bg-zinc-900`}
+      className={`w-80 rounded-xl border p-4 shadow-md transition
+        ${selected ? 'border-blue-500 shadow-blue-500/20' : 'border-zinc-700'}
+        bg-zinc-900 relative`}
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
     >
+      {/* Input Handle (Incoming Connections) */}
+      <Handle
+        type="target"
+        position={Position.Top}
+        id="input"
+        style={{ background: '#10B981', width: 12, height: 12, borderRadius: '50%' }}
+      />
+
       {/* Title */}
       <div className="flex items-center gap-2 mb-4">
         <Settings className="w-5 h-5 text-blue-400" />
-        <h3 className="text-white font-semibold text-sm tracking-wide">Tool Node (S3 Reader)</h3>
+        <h3 className="text-white font-semibold text-sm tracking-wide">Tool Node</h3>
       </div>
 
       {/* Tool Type Selector */}
@@ -168,44 +165,16 @@ export default function ToolNode({ data, selected, id }: NodeProps) {
         </Select>
       </div>
 
-      {/* Dynamic Fields */}
+      {/* Dynamic Config Fields */}
       {renderFields()}
 
-      {/* Operation Selector */}
-      <div className="mb-4">
-        <label className="text-xs text-zinc-400 mb-1 block">Operation</label>
-        <Select
-          value={data.operation || ''}
-          onValueChange={(val) => handleChange('operation', val)}
-        >
-          <SelectTrigger className="bg-zinc-800 border-zinc-600 text-white">
-            <SelectValue placeholder="Select Operation" />
-          </SelectTrigger>
-          <SelectContent className="bg-zinc-900 text-white border-zinc-700">
-            <SelectItem value="listObjects">List Objects</SelectItem>
-            <SelectItem value="getObject">Get Object</SelectItem>
-            <SelectItem value="putObject">Put Object</SelectItem>
-            <SelectItem value="deleteObject">Delete Object</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-
-      {/* Object Key (if needed) */}
-      {(data.operation === 'getObject' || data.operation === 'putObject' || data.operation === 'deleteObject') && (
-        <div className="mb-4">
-          <label className="text-xs text-zinc-400 mb-1 block">Object Key</label>
-          <Input
-            value={data.objectKey || ''}
-            onChange={(e) => handleChange('objectKey', e.target.value)}
-            placeholder="Enter S3 Object Key"
-            className="bg-zinc-800 text-white border-zinc-600 focus:border-blue-500"
-          />
-        </div>
-      )}
-
-      {/* Input and Output Handles */}
-      <Handle type="target" position={Position.Top} id="input" style={{ background: '#3B82F6' }} />
-      <Handle type="source" position={Position.Bottom} id="output" style={{ background: '#3B82F6' }} />
+      {/* Output Handle (Outgoing Connections) */}
+      <Handle
+        type="source"
+        position={Position.Bottom}
+        id="output"
+        style={{ background: '#3B82F6', width: 12, height: 12, borderRadius: '50%' }}
+      />
     </motion.div>
   );
 }

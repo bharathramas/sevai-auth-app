@@ -8,14 +8,12 @@ import { Sparkles } from 'lucide-react';
 export default function PromptNode({ data, selected, id }: NodeProps) {
   return (
     <motion.div
-      className={`w-80 rounded-xl border p-4 shadow-md transition 
-        ${selected ? 'border-blue-500 shadow-blue-500/20' : 'border-zinc-700'} 
-        bg-zinc-900`}
+      className={`w-80 rounded-xl border p-4 shadow-md transition
+        ${selected ? 'border-blue-500 shadow-blue-500/20' : 'border-zinc-700'}
+        bg-zinc-900 relative`}
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
     >
-
-
       {/* Target Handle (incoming connections) */}
       <Handle
         type="target"
@@ -23,7 +21,6 @@ export default function PromptNode({ data, selected, id }: NodeProps) {
         id="input"
         style={{ background: '#10B981', borderRadius: '50%' }}
       />
-
 
       {/* Title */}
       <div className="flex items-center gap-2 mb-4">
@@ -43,12 +40,12 @@ export default function PromptNode({ data, selected, id }: NodeProps) {
         />
       </div>
 
-      {/* Output handle */}
+      {/* Source Handle (outgoing connections) */}
       <Handle
         type="source"
         position={Position.Bottom}
         id="output"
-        style={{ background: '#3B82F6' }}
+        style={{ background: '#3B82F6', borderRadius: '50%' }}
       />
     </motion.div>
   );

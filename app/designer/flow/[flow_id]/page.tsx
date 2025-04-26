@@ -1,8 +1,13 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import Canvas from '@/app/designer/components/Canvas/Canvas';
+import Sidebar from '@/app/designer/components/Sidebar/Sidebar';
+import NodeSettings from '@/app/designer/components/Settings/NodeSettings';
+import { Node, Edge } from 'reactflow';
+import { getSession } from 'next-auth/react'; // if session needed
+import { useRouter } from 'next/navigation'; // if you use router
 
 export default function DesignerFlowPage() {
   const { flow_id } = useParams() as { flow_id: string };
