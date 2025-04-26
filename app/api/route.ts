@@ -7,8 +7,8 @@ const BUCKET_NAME = 'sevaiapp';
 
 export async function GET() {
   const session = await getServerSession();
-  const tenant_id = session?.user?.tenant_id || '';
-  const role = session?.user?.role || '';
+  const tenant_id = session?.user?.["custom:tenant_id"] || '';
+  const role = session?.user?.["custom:role"] || '';
   const email = session?.user?.email || '';
 
   if (!tenant_id) {

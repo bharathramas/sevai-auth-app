@@ -12,9 +12,9 @@ import { toast } from 'sonner';
 
 export default function IngestPage() {
   const { data: session } = useSession();
-  const role = session?.user?.role || 'customer_user';
+  const role = session?.user?.["custom:role"] || 'customer_user';
   const email = session?.user?.email || '';
-  const tenant_id = session?.user?.tenant_id || 'unknown';
+  const tenant_id = session?.user?.["custom:tenant_id"] || 'unknown';
 
   const [search, setSearch] = useState('');
   const [files, setFiles] = useState<any[]>([]);
